@@ -3,6 +3,7 @@
 ** Overview
    This plugin adds org-mode support to Jekyll. it renders the
    org-mode file in posts and pages.
+
    TODO: and syntax highlighting 
 
 ** Requirements
