@@ -1,0 +1,24 @@
+* jekyll-org
+
+** Overview
+   This plugin adds org-mode support to Jekyll. it renders the
+   org-mode file in posts and pages.
+   TODO: and syntax highlighting 
+
+** Requirements
+- Jekyll
+- org-ruby
+   
+** Installation
+   1. install org-ruby
+      #+BEGIN_SRC sh
+      $ sudo gem install org-ruby
+      #+END_SRC
+ 
+** Source code Highlighting
+   TODO: add document 
+** Author
+   eggcaker <eggcaker@gmail.com>
+
+** License
+   MIT
