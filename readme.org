@@ -15,11 +15,20 @@
 $ sudo gem install org-ruby
 #+END_SRC
    2. clone the jekyll-org plugin
- 
+
 #+BEGIN_SRC sh
 $ git clone http://github.com/eggckaer/jekyll-org.git /path/to/jekyllpath/_plugins/jekyll-org
 #+END_SRC
 
+   if you want use jekyll-org as a submodule, sure you can 
+ 
+#+BEGIN_SRC sh
+$ cd /path/to/your/jekyll/site/
+$ git submodule add http://github.com/eggckaer/jekyll-org.git _plugins/jekyll-org
+#+END_SRC
+ 
+ 
+ 
 ** Usage
    create a new file with .org extesion in _posts, and write post with org-mode. this all.
    then generate you jekyll site.
