@@ -11,10 +11,19 @@
    
 ** Installation
    1. install org-ruby
-      #+BEGIN_SRC sh
-      $ sudo gem install org-ruby
-      #+END_SRC
+#+BEGIN_SRC sh
+$ sudo gem install org-ruby
+#+END_SRC
+   2. clone the jekyll-org plugin
  
+#+BEGIN_SRC sh
+$ git clone http://github.com/eggckaer/jekyll-org.git /path/to/jekyllpath/_plugins/jekyll-org
+#+END_SRC
+
+** Usage
+   create a new file with .org extesion in _posts, and write post with org-mode. this all.
+   then generate you jekyll site.
+
 ** Source code Highlighting
    TODO: add document 
 ** Author
