@@ -15,7 +15,7 @@ module Jekyll
     end
 
     def convert(content)
-      Orgmode::Parser.new(content).to_html
+      content
     end
   end
 
@@ -31,19 +31,22 @@ module Jekyll
   # and instead use in buffer settings from Org mode
   class Post
     def read_yaml(base, name, opts = {})
-      self.content = File.read_with_options(File.join(base, name),
-                                            merged_file_read_opts(opts))
+      content = File.read_with_options(File.join(base, name),
+                                       merged_file_read_opts(opts))
       self.data ||= {}
 
-      org_text = Orgmode::Parser.new(self.content)
+      org_text = Orgmode::Parser.new(content)
       org_text.in_buffer_settings.each_pair do |key, value|
-        self.data[key.downcase] = value
+        # Remove #+TITLE from the buffer settings to avoid double exporting
+        org_text.in_buffer_settings.delete(key) if key =~ /title/i
+        buffer_setting = key.downcase
+        self.data[buffer_setting] = value
       end
 
+      self.content = org_text.to_html
       self.extracted_excerpt = self.extract_excerpt
     rescue => e
-      puts "Error converting file #{File.join(base, name)}: #{e.message}"
+      puts "Error converting file #{File.join(base, name)}: #{e.message} #{e.backtrace}"
     end
   end
 end
-
