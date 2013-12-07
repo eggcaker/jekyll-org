@@ -43,7 +43,12 @@ module Jekyll
         self.data[buffer_setting] = value
       end
 
-      self.content = org_text.to_html
+      # Disable Liquid tags from the output
+      self.content = <<ORG
+{% raw %}
+#{org_text.to_html}
+{% endraw %}
+ORG
       self.extracted_excerpt = self.extract_excerpt
     rescue => e
       puts "Error converting file #{File.join(base, name)}: #{e.message} #{e.backtrace}"
