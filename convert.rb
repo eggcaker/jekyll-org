@@ -31,8 +31,7 @@ module Jekyll
   # and instead use in buffer settings from Org mode
   class Post
     def read_yaml(base, name, opts = {})
-      content = File.read_with_options(File.join(base, name),
-                                       merged_file_read_opts(opts))
+      content = File.read(File.join(base, name), merged_file_read_opts(opts))
       self.data ||= {}
 
       org_text = Orgmode::Parser.new(content)
