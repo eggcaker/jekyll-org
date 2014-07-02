@@ -34,7 +34,7 @@ $ git submodule add http://github.com/eggcaker/jekyll-org.git _plugins/jekyll-or
 create a new file with .org extesion in _posts, and write post with org-mode. this all.
 then generate you jekyll site.
 
-*** **NOTES** for liquid language
+*** NOTES: for liquid language
 
 by default the all content export to raw html format with org-ruby. but you wan add =#+liquid: whatevervalue==
 in the header.  then you can use some liquid languages. 
