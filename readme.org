@@ -59,8 +59,6 @@ then you will get output like
 <p>2014-07-02T08:20:28+08:00</p>
 #+END_EXAMPLE
    
-if you write something like ={{ 'hello' | upcase }}= 
-with ' still not woring yet.
 
 ** Source code Highlighting
   added source code block same as in org-mode, add a block,for example ruby: 
