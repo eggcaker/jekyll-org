@@ -53,6 +53,8 @@ module Jekyll
       
       if liquid_enabled  
         self.content = org_text.to_html
+        self.content = self.content.gsub("&#8216;","'")
+        self.content = self.content.gsub("&#8217;", "'")
       else
         self.content = <<ORG
 {% raw %} 
@@ -60,6 +62,7 @@ module Jekyll
 {% endraw %}
 ORG
       end
+      
 
       self.extracted_excerpt = self.extract_excerpt
     rescue => e
