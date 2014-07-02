@@ -1,107 +1,139 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Jekyll-org : a Jekyll plugin for org-mode" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>jekyll-org by eggcaker</title>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Jekyll-org</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
-
   <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">jekyll-org</h1>
+        <p class="header">a Jekyll plugin for org-mode</p>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/eggcaker/jekyll-org">View on GitHub</a>
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/eggcaker/jekyll-org/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/eggcaker/jekyll-org/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/eggcaker/jekyll-org">View On GitHub</a></li>
+        </ul>
 
-          <h1 id="project_title">Jekyll-org</h1>
-          <h2 id="project_tagline">a Jekyll plugin for org-mode</h2>
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/eggcaker">eggcaker</a></p>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/eggcaker/jekyll-org/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/eggcaker/jekyll-org/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>jekyll-org</h1>
+      </header>
+      <section>
+        <h1>
+<a name="jekyll-org" class="anchor" href="#jekyll-org"><span class="octicon octicon-link"></span></a>jekyll-org</h1>
 
-<h2>Overview</h2>
+<h2>
+<a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
 
 <p>This plugin adds org-mode support to Jekyll. it renders the
 org-mode file in posts and pages.</p>
 
-<p>TODO: and syntax highlighting </p>
-
-<h2>Requirements</h2>
+<h2>
+<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
 
 <ul>
-<li>Jekyll</li>
-<li>org-ruby</li>
-</ul><h2>Installation</h2>
+<li>  Jekyll</li>
+<li>  org-ruby</li>
+</ul><h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
 <ol>
 <li>
 <p>install org-ruby</p>
 
-<div class="highlight">
-<pre><span class="nv">$ </span><span class="o">[</span>sudo<span class="o">]</span> gem install org-ruby
-</pre>
-</div>
+<pre><code>$ sudo gem install org-ruby
+</code></pre>
 </li>
 <li>
 <p>clone the jekyll-org plugin</p>
 
-<div class="highlight">
-<pre><span class="nv">$ </span>git clone http://github.com/eggcaker/jekyll-org.git /path/to/jekyllpath/_plugins/jekyll-org
-</pre>
-</div>
+<p>#+BEGIN_RC sh
+$ git clone <a href="http://github.com/eggcaker/jekyll-org.git">http://github.com/eggcaker/jekyll-org.git</a> /path/to/jekyllpath/_plugins/jekyll-org</p>
 
-
-<p>if you want use jekyll-org as a submodule, sure you can </p>
+<p>#+END_SRC</p>
 </li>
-</ol><div class="highlight">
-<pre><span class="nv">$ </span><span class="nb">cd</span> /path/to/your/jekyll/site/
-<span class="nv">$ </span>git submodule add http://github.com/eggcaker/jekyll-org.git _plugins/jekyll-org
-</pre>
-</div>
+</ol><p>if you want use jekyll-org as a submodule, sure you can </p>
 
+<pre><code>$ cd /path/to/your/jekyll/site/
+$ git submodule add http://github.com/eggcaker/jekyll-org.git _plugins/jekyll-org
+</code></pre>
 
-<h2>Usage</h2>
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
 <p>create a new file with .org extesion in _posts, and write post with org-mode. this all.
 then generate you jekyll site.</p>
 
-<h2>Source code Highlighting</h2>
+<h3>
+<a name="notes-for-liquid-language" class="anchor" href="#notes-for-liquid-language"><span class="octicon octicon-link"></span></a>NOTES: for liquid language</h3>
 
-<p>TODO: add document </p>
+<p>by default the all content export to raw html format with org-ruby. but you wan add <code>#+liquid: whatevervalue=</code>
+in the header.  then you can use some liquid languages. </p>
 
-<h2>Author</h2>
+<pre><code>#+liquid: enabled
+#+foo: hello world
+
+{{ page.foo }} 
+
+or 
+
+{{ site.time | date_to_xmlschema }}
+</code></pre>
+
+<p>then you will get output like </p>
+
+<pre><code>&lt;p&gt;hello world&lt;/p&gt;
+&lt;p&gt;or&lt;/p&gt;
+&lt;p&gt;2014-07-02T08:20:28+08:00&lt;/p&gt;
+</code></pre>
+
+<h2>
+<a name="source-code-highlighting" class="anchor" href="#source-code-highlighting"><span class="octicon octicon-link"></span></a>Source code Highlighting</h2>
+
+<p>added source code block same as in org-mode, add a block,for example ruby: </p>
+
+<pre><code>#+BEGIN_SRC 
+ require 'rubygems'
+ require 'org-ruby'
+ data = IO.read(filename)
+ puts Orgmode::Parser.new(data).to_html
+#+END_SRC
+</code></pre>
+
+<p>then  you got code highlighting </p>
+
+<div class="highlight highlight-ruby"><pre>    <span class="nb">require</span> <span class="s1">'rubygems'</span>
+    <span class="nb">require</span> <span class="s1">'org-ruby'</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="no">IO</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="nb">puts</span> <span class="no">Orgmode</span><span class="o">::</span><span class="no">Parser</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span>
+</pre></div>
+
+<h2>
+<a name="author" class="anchor" href="#author"><span class="octicon octicon-link"></span></a>Author</h2>
 
 <p>eggcaker <a href="mailto:eggcaker@gmail.com">eggcaker@gmail.com</a></p>
 
-<h2>License</h2>
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p>MIT</p>
       </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Jekyll-org maintained by <a href="https://github.com/eggcaker">eggcaker</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      <footer>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
       </footer>
     </div>
-
-    
-
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
   </body>
 </html>
