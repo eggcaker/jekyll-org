@@ -33,21 +33,34 @@ module Jekyll
     def read_yaml(base, name, opts = {})
       content = File.read(File.join(base, name), merged_file_read_opts(opts))
       self.data ||= {}
+      liquid_enabled = false; 
 
       org_text = Orgmode::Parser.new(content)
       org_text.in_buffer_settings.each_pair do |key, value|
         # Remove #+TITLE from the buffer settings to avoid double exporting
         org_text.in_buffer_settings.delete(key) if key =~ /title/i
         buffer_setting = key.downcase
+
+        if buffer_setting == 'liquid'
+          liquid_enabled = true 
+        end 
+        
         self.data[buffer_setting] = value
       end
-
-      # Disable Liquid tags from the output
-      self.content = <<ORG
-{% raw %}
+      
+      
+      # Disable Liquid tags from the output by default or enabled with liquid_enabled tag
+      
+      if liquid_enabled  
+        self.content = org_text.to_html
+      else
+        self.content = <<ORG
+{% raw %} 
 #{org_text.to_html}
 {% endraw %}
 ORG
+      end
+
       self.extracted_excerpt = self.extract_excerpt
     rescue => e
       puts "Error converting file #{File.join(base, name)}: #{e.message} #{e.backtrace}"

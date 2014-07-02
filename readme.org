@@ -29,13 +29,60 @@ $ git submodule add http://github.com/eggcaker/jekyll-org.git _plugins/jekyll-or
 #+END_SRC
  
  
- 
 ** Usage
-   create a new file with .org extesion in _posts, and write post with org-mode. this all.
-   then generate you jekyll site.
+
+create a new file with .org extesion in _posts, and write post with org-mode. this all.
+then generate you jekyll site.
+
+*** **NOTES** for liquid language
+
+by default the all content export to raw html format with org-ruby. but you wan add =#+liquid: whatevervalue==
+in the header.  then you can use some liquid languages. 
+
+#+BEGIN_EXAMPLE
+#+liquid: enabled
+#+foo: hello world
+
+{{ page.foo }} 
+
+or 
+
+{{ site.time | date_to_xmlschema }}
+
+#+END_EXAMPLE
+
+then you will get output like 
+
+#+BEGIN_EXAMPLE
+<p>hello world</p>
+<p>or</p>
+<p>2014-07-02T08:20:28+08:00</p>
+#+END_EXAMPLE
+   
+if you write something like ={{ 'hello' | upcase }}= 
+with ' still not woring yet.
 
 ** Source code Highlighting
-   TODO: add document 
+  added source code block same as in org-mode, add a block,for example ruby: 
+
+  #+BEGIN_EXAMPLE
+  #+BEGIN_SRC 
+   require 'rubygems'
+   require 'org-ruby'
+   data = IO.read(filename)
+   puts Orgmode::Parser.new(data).to_html
+  #+END_SRC
+  #+END_EXAMPLE
+
+  then  you got code highlighting 
+
+  #+BEGIN_SRC 
+   require 'rubygems'
+   require 'org-ruby'
+   data = IO.read(filename)
+   puts Orgmode::Parser.new(data).to_html
+  #+END_SRC
+  
 ** Author
    eggcaker <eggcaker@gmail.com>
 
