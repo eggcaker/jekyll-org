@@ -76,7 +76,7 @@ with ' still not woring yet.
 
   then  you got code highlighting 
 
-  #+BEGIN_SRC 
+  #+BEGIN_SRC ruby
    require 'rubygems'
    require 'org-ruby'
    data = IO.read(filename)
