@@ -4,22 +4,20 @@
    This plugin adds org-mode support to Jekyll. it renders the
    org-mode file in posts and pages.
 
-   TODO: and syntax highlighting 
-
 ** Requirements
 - Jekyll
 - org-ruby
    
 ** Installation
    1. install org-ruby
-#+BEGIN_SRC sh
-$ sudo gem install org-ruby
-#+END_SRC
+      #+BEGIN_SRC sh
+      $ sudo gem install org-ruby
+      #+END_SRC
    2. clone the jekyll-org plugin
 
-#+BEGIN_SRC sh
-$ git clone http://github.com/eggcaker/jekyll-org.git /path/to/jekyllpath/_plugins/jekyll-org
-#+END_SRC
+      #+BEGIN_SRC sh
+      $ git clone http://github.com/eggcaker/jekyll-org.git /path/to/jekyllpath/_plugins/jekyll-org
+      #+END_SRC
 
    if you want use jekyll-org as a submodule, sure you can 
  
