@@ -1,68 +1,81 @@
 * jekyll-org
 
 ** Overview
-   This plugin adds org-mode support to Jekyll. it renders the
-   org-mode file in posts and pages.
+
+   This plugin adds [[http://orgmode.org/][Org mode]] support to Jekyll and lets you write posts and pages in Org.
 
 ** Requirements
+
 - Jekyll
 - org-ruby
-   
+
 ** Installation
-   1. install org-ruby
+   1. Install org-ruby
       #+BEGIN_SRC sh
       $ sudo gem install org-ruby
       #+END_SRC
-   2. clone the jekyll-org plugin
+   2. Clone the jekyll-org plugin
 
       #+BEGIN_SRC sh
       $ git clone http://github.com/eggcaker/jekyll-org.git /path/to/jekyllpath/_plugins/jekyll-org
       #+END_SRC
 
-   if you want use jekyll-org as a submodule, sure you can 
- 
+   If you want use jekyll-org as a submodule, you can:
+
 #+BEGIN_SRC sh
 $ cd /path/to/your/jekyll/site/
 $ git submodule add http://github.com/eggcaker/jekyll-org.git _plugins/jekyll-org
 #+END_SRC
- 
- 
+
 ** Usage
 
-create a new file with .org extesion in _posts, and write post with org-mode. this all.
-then generate you jekyll site.
+   Create a new file with =.org= extesion in =_posts=, and write the post with Org. That is all! Generate your Jekyll site as you usually do.
 
-*** NOTES: for liquid language
+** Front matter
 
-by default the all content export to raw html format with org-ruby. but you wan add =#+liquid: whatevervalue==
-in the header.  then you can use some liquid languages. 
+   Instead of YAML the front matter is configured in the usual Org way, with no lines:
+
+   #+BEGIN_EXAMPLE
+   #+TITLE: Jekyll and Org together
+   #+LAYOUT: posts
+   #+TAGS: jekyll org-mode
+
+   This is a blog post about Jekyll and Org mode.
+   #+END_EXAMPLE
+
+** Liquid templating
+
+By default the all content is exported to raw HTML with org-ruby, but you can add =#+liquid: whatevervalue==
+in the header.  Then you can use [[http://docs.shopify.com/themes/liquid-documentation/basics][Liquid]] tags.
+
+For example, if your Org file contains
 
 #+BEGIN_EXAMPLE
 #+liquid: enabled
 #+foo: hello world
 
-{{ page.foo }} 
+{{ page.foo }}
 
-or 
+or
 
 {{ site.time | date_to_xmlschema }}
 
 #+END_EXAMPLE
 
-then you will get output like 
+then you will get output like
 
 #+BEGIN_EXAMPLE
 <p>hello world</p>
 <p>or</p>
 <p>2014-07-02T08:20:28+08:00</p>
 #+END_EXAMPLE
-   
 
-** Source code Highlighting
-  added source code block same as in org-mode, add a block,for example ruby: 
+** Source code highlighting
+
+   Add a source code block as you would in Org, for example Ruby:
 
   #+BEGIN_EXAMPLE
-  #+BEGIN_SRC 
+  #+BEGIN_SRC
    require 'rubygems'
    require 'org-ruby'
    data = IO.read(filename)
@@ -70,7 +83,7 @@ then you will get output like
   #+END_SRC
   #+END_EXAMPLE
 
-  then  you got code highlighting 
+  Then the output will have code highlighting:
 
   #+BEGIN_SRC ruby
    require 'rubygems'
@@ -78,9 +91,11 @@ then you will get output like
    data = IO.read(filename)
    puts Orgmode::Parser.new(data).to_html
   #+END_SRC
-  
+
 ** Author
+
    eggcaker <eggcaker@gmail.com>
 
 ** License
+
    MIT
