@@ -27,13 +27,13 @@ module Jekyll
     end
   end
 
-  # This overrides having to use YAML in the posts
-  # and instead use in buffer settings from Org mode
+  # This overrides having to use YAML in the posts.
+  # Instead use settings from Org mode.
   class Post
     def read_yaml(base, name, opts = {})
       content = File.read(File.join(base, name), merged_file_read_opts(opts))
       self.data ||= {}
-      liquid_enabled = false; 
+      liquid_enabled = false;
 
       org_text = Orgmode::Parser.new(content)
       org_text.in_buffer_settings.each_pair do |key, value|
@@ -42,27 +42,25 @@ module Jekyll
         buffer_setting = key.downcase
 
         if buffer_setting == 'liquid'
-          liquid_enabled = true 
-        end 
-        
+          liquid_enabled = true
+        end
+
         self.data[buffer_setting] = value
       end
-      
-      
+
       # Disable Liquid tags from the output by default or enabled with liquid_enabled tag
-      
-      if liquid_enabled  
+
+      if liquid_enabled
         self.content = org_text.to_html
         self.content = self.content.gsub("&#8216;","'")
         self.content = self.content.gsub("&#8217;", "'")
       else
         self.content = <<ORG
-{% raw %} 
+{% raw %}
 #{org_text.to_html}
 {% endraw %}
 ORG
       end
-      
 
       self.extracted_excerpt = self.extract_excerpt
     rescue => e
