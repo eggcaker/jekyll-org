@@ -30,7 +30,12 @@ module Jekyll
   # This overrides having to use YAML in the posts
   # and instead use in buffer settings from Org mode
   class Post
+    alias :_orig_read_yaml :read_yaml
     def read_yaml(base, name, opts = {})
+      if name !~ /[.]org$/
+        return _orig_read_yaml(base, name)
+      end
+
       content = File.read(File.join(base, name), merged_file_read_opts(opts))
       self.data ||= {}
       liquid_enabled = false;
