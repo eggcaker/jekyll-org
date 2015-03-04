@@ -34,7 +34,7 @@ module Jekyll
       content = File.read(File.join(base, name), merged_file_read_opts(opts))
       self.data ||= {}
 
-      org_text = Orgmode::Parser.new(content)
+      org_text = Orgmode::Parser.new(content, { markup_file: "html.tags.yml" })
       org_text.in_buffer_settings.each_pair do |key, value|
         # Remove #+TITLE from the buffer settings to avoid double exporting
         org_text.in_buffer_settings.delete(key) if key =~ /title/i
