@@ -27,8 +27,8 @@ module Jekyll
     end
   end
 
-  # This overrides having to use YAML in the posts
-  # and instead use in buffer settings from Org mode
+  # This overrides having to use YAML in the posts.
+  # Instead use settings from Org mode.
   class Post
     alias :_orig_read_yaml :read_yaml
     def read_yaml(base, name, opts = {})
@@ -53,7 +53,6 @@ module Jekyll
         self.data[buffer_setting] = value
       end
 
-
       # Disable Liquid tags from the output by default or enabled with liquid_enabled tag
 
       if liquid_enabled
@@ -67,7 +66,6 @@ module Jekyll
 {% endraw %}
 ORG
       end
-
 
       self.extracted_excerpt = self.extract_excerpt
     rescue => e
