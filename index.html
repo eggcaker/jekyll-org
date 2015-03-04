@@ -31,79 +31,96 @@
       </header>
       <section>
         <h1>
-<a name="jekyll-org" class="anchor" href="#jekyll-org"><span class="octicon octicon-link"></span></a>jekyll-org</h1>
+<a id="jekyll-org" class="anchor" href="#jekyll-org" aria-hidden="true"><span class="octicon octicon-link"></span></a>jekyll-org</h1>
 
 <h2>
-<a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
+<a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h2>
 
-<p>This plugin adds org-mode support to Jekyll. it renders the
-org-mode file in posts and pages.</p>
+<p>This plugin adds <a href="http://orgmode.org/">Org mode</a> support to
+<a href="http://jekyllrb.com">Jekyll</a> and lets you write posts and pages in Org.</p>
 
 <h2>
-<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h2>
 
 <ul>
 <li>  Jekyll</li>
 <li>  org-ruby</li>
-</ul><h2>
-<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+</ul>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
 
 <ol>
 <li>
-<p>install org-ruby</p>
+<p>Install org-ruby</p>
 
-<pre><code>$ sudo gem install org-ruby
-</code></pre>
+<div class="highlight highlight-bash"><pre>$ sudo gem install org-ruby</pre></div>
 </li>
 <li>
-<p>clone the jekyll-org plugin</p>
+<p>Clone the jekyll-org plugin</p>
 
-<p>#+BEGIN_RC sh
-$ git clone <a href="http://github.com/eggcaker/jekyll-org.git">http://github.com/eggcaker/jekyll-org.git</a> /path/to/jekyllpath/_plugins/jekyll-org</p>
-
-<p>#+END_SRC</p>
+<div class="highlight highlight-bash"><pre>$ git clone http://github.com/eggcaker/jekyll-org.git /path/to/jekyllpath/_plugins/jekyll-org</pre></div>
 </li>
-</ol><p>if you want use jekyll-org as a submodule, sure you can </p>
+</ol>
 
-<pre><code>$ cd /path/to/your/jekyll/site/
-$ git submodule add http://github.com/eggcaker/jekyll-org.git _plugins/jekyll-org
+<p>If you want use jekyll-org as a submodule, you can:</p>
+
+<div class="highlight highlight-bash"><pre>$ <span class="pl-s3">cd</span> /path/to/your/jekyll/site/
+$ git submodule add http://github.com/eggcaker/jekyll-org.git _plugins/jekyll-org</pre></div>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Create a new file with <code>.org</code> extesion in <code>_posts</code>, and write the post
+with Org. That is all! Generate your Jekyll site as you usually do.</p>
+
+<h2>
+<a id="front-matter" class="anchor" href="#front-matter" aria-hidden="true"><span class="octicon octicon-link"></span></a>Front matter</h2>
+
+<p>Instead of YAML the front matter is configured in the usual Org way,
+with no lines:</p>
+
+<pre lang="example"><code>#+TITLE: Jekyll and Org together
+#+LAYOUT: posts
+#+TAGS: jekyll org-mode
+
+This is a blog post about Jekyll and Org mode.
 </code></pre>
 
 <h2>
-<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+<a id="liquid-templating" class="anchor" href="#liquid-templating" aria-hidden="true"><span class="octicon octicon-link"></span></a>Liquid templating</h2>
 
-<p>create a new file with .org extesion in _posts, and write post with org-mode. this all.
-then generate you jekyll site.</p>
+<p>By default the all content is exported to raw HTML with org-ruby, but
+you can add <code>#+liquid: whatevervalue=</code> in the header. Then you can use
+<a href="http://docs.shopify.com/themes/liquid-documentation/basics">Liquid</a>
+tags.</p>
 
-<h3>
-<a name="notes-for-liquid-language" class="anchor" href="#notes-for-liquid-language"><span class="octicon octicon-link"></span></a>NOTES: for liquid language</h3>
+<p>For example, if your Org file contains</p>
 
-<p>by default the all content export to raw html format with org-ruby. but you wan add <code>#+liquid: whatevervalue=</code>
-in the header.  then you can use some liquid languages. </p>
-
-<pre><code>#+liquid: enabled
+<pre lang="example"><code>#+liquid: enabled
 #+foo: hello world
 
-{{ page.foo }} 
+{{ page.foo }}
 
-or 
+or
 
 {{ site.time | date_to_xmlschema }}
+
 </code></pre>
 
-<p>then you will get output like </p>
+<p>then you will get output like</p>
 
-<pre><code>&lt;p&gt;hello world&lt;/p&gt;
+<pre lang="example"><code>&lt;p&gt;hello world&lt;/p&gt;
 &lt;p&gt;or&lt;/p&gt;
 &lt;p&gt;2014-07-02T08:20:28+08:00&lt;/p&gt;
 </code></pre>
 
 <h2>
-<a name="source-code-highlighting" class="anchor" href="#source-code-highlighting"><span class="octicon octicon-link"></span></a>Source code Highlighting</h2>
+<a id="source-code-highlighting" class="anchor" href="#source-code-highlighting" aria-hidden="true"><span class="octicon octicon-link"></span></a>Source code highlighting</h2>
 
-<p>added source code block same as in org-mode, add a block,for example ruby: </p>
+<p>Add a source code block as you would in Org, for example Ruby:</p>
 
-<pre><code>#+BEGIN_SRC 
+<pre lang="example"><code>#+BEGIN_SRC
  require 'rubygems'
  require 'org-ruby'
  data = IO.read(filename)
@@ -111,21 +128,20 @@ or
 #+END_SRC
 </code></pre>
 
-<p>then  you got code highlighting </p>
+<p>Then the output will have code highlighting:</p>
 
-<div class="highlight highlight-ruby"><pre>    <span class="nb">require</span> <span class="s1">'rubygems'</span>
-    <span class="nb">require</span> <span class="s1">'org-ruby'</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="no">IO</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-    <span class="nb">puts</span> <span class="no">Orgmode</span><span class="o">::</span><span class="no">Parser</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span>
-</pre></div>
-
-<h2>
-<a name="author" class="anchor" href="#author"><span class="octicon octicon-link"></span></a>Author</h2>
-
-<p>eggcaker <a href="mailto:eggcaker@gmail.com">eggcaker@gmail.com</a></p>
+<div class="highlight highlight-ruby"><pre> <span class="pl-k">require</span> <span class="pl-s1"><span class="pl-pds">'</span>rubygems<span class="pl-pds">'</span></span>
+ <span class="pl-k">require</span> <span class="pl-s1"><span class="pl-pds">'</span>org-ruby<span class="pl-pds">'</span></span>
+ data <span class="pl-k">=</span> <span class="pl-s3">IO</span>.read(filename)
+ puts <span class="pl-s3">Orgmode</span>::<span class="pl-s3">Parser</span>.<span class="pl-k">new</span>(data).to_html</pre></div>
 
 <h2>
-<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+<a id="author" class="anchor" href="#author" aria-hidden="true"><span class="octicon octicon-link"></span></a>Author</h2>
+
+<p>eggcaker &lt;<a href="mailto:eggcaker@gmail.com">eggcaker@gmail.com</a>&gt;</p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p>MIT</p>
       </section>
