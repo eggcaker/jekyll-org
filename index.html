@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>jekyll-org by eggcaker</title>
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="javascripts/scale.fix.js"></script>
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="/stylesheets/pygment_trac.css">
+    <script src="/javascripts/scale.fix.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -130,10 +130,11 @@ or
 
 <p>Then the output will have code highlighting:</p>
 
-<div class="highlight highlight-ruby"><pre> <span class="pl-k">require</span> <span class="pl-s1"><span class="pl-pds">'</span>rubygems<span class="pl-pds">'</span></span>
- <span class="pl-k">require</span> <span class="pl-s1"><span class="pl-pds">'</span>org-ruby<span class="pl-pds">'</span></span>
- data <span class="pl-k">=</span> <span class="pl-s3">IO</span>.read(filename)
- puts <span class="pl-s3">Orgmode</span>::<span class="pl-s3">Parser</span>.<span class="pl-k">new</span>(data).to_html</pre></div>
+<div class="highlight highlight-ruby"><pre>    <span class="nb">require</span> <span class="s1">'rubygems'</span>
+    <span class="nb">require</span> <span class="s1">'org-ruby'</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="no">IO</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="nb">puts</span> <span class="no">Orgmode</span><span class="o">::</span><span class="no">Parser</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">to_html</span>
+</pre></div>
 
 <h2>
 <a id="author" class="anchor" href="#author" aria-hidden="true"><span class="octicon octicon-link"></span></a>Author</h2>
