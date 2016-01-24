@@ -1,7 +1,6 @@
 * jekyll-org
 
-  #+ATTR_HTML: title="Join the chat at https://gitter.im/eggcaker/jekyll-org"
-  [[https://gitter.im/eggcaker/jekyll-org?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge][file:https://badges.gitter.im/Join%20Chat.svg]]
+** NOTE: not working with latest version of jekyll. PR welcome.
 
 ** Overview
 
