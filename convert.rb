@@ -1,5 +1,9 @@
 require 'org-ruby'
 
+if Jekyll::VERSION < "3.0"
+  raise Jekyll::FatalException, "This version of jekyll-org is only compatible with Jekyll v3 and above."
+end
+
 module Jekyll
   class OrgConverter < Converter
     safe true
@@ -22,23 +26,25 @@ module Jekyll
   module Filters
     def restify(input)
       site = @context.registers[:site]
-      converter = site.getConverterImpl(Jekyll::OrgConverter)
+      converter = site.find_converter_instance(Jekyll::OrgConverter)
       converter.convert(input)
     end
   end
 
   # This overrides having to use YAML in the posts.
   # Instead use settings from Org mode.
-  class Post
-    alias :_orig_read_yaml :read_yaml
-    def read_yaml(base, name, opts = {})
-      if name !~ /[.]org$/
-        return _orig_read_yaml(base, name)
+  class Document
+    alias :_orig_read :read
+    def read(opts = {})
+      unless relative_path.end_with?(".org")
+        return _orig_read(opts)
       end
 
-      content = File.read(File.join(base, name), merged_file_read_opts(opts))
+      Jekyll.logger.debug "Reading:", relative_path
+
+      self.content = File.read(path, Utils.merged_file_read_opts(site, opts))
       self.data ||= {}
-      liquid_enabled = false;
+      liquid_enabled = false
 
       org_text = Orgmode::Parser.new(content, { markup_file: "html.tags.yml" })
       org_text.in_buffer_settings.each_pair do |key, value|
@@ -67,9 +73,9 @@ module Jekyll
 ORG
       end
 
-      self.extracted_excerpt = self.extract_excerpt
+      post_read
     rescue => e
-      puts "Error converting file #{File.join(base, name)}: #{e.message} #{e.backtrace}"
+      puts "Error converting file #{relative_path}: #{e.message} #{e.backtrace}"
     end
   end
 end
