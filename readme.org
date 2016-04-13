@@ -1,7 +1,5 @@
 * jekyll-org
 
-** NOTE: not working with latest version of jekyll. PR welcome.
-
 ** Overview
 
    This plugin adds [[http://orgmode.org/][Org mode]] support to [[http://jekyllrb.com][Jekyll]] and lets you write posts and pages in Org.
