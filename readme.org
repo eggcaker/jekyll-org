@@ -29,7 +29,7 @@ $ git submodule add http://github.com/eggcaker/jekyll-org.git _plugins/jekyll-or
 
 ** Usage
 
-   Create a new file with =.org= extesion in =_posts=, and write the post with Org. That is all! Generate your Jekyll site as you usually do.
+   Create a new file with =.org= extension in =_posts=, and write the post with Org. That is all! Generate your Jekyll site as you usually do.
 
 ** Front matter
 
