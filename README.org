@@ -10,23 +10,37 @@
 - org-ruby
 
 ** Installation
-   1. Install org-ruby
-      #+BEGIN_SRC sh
-      $ sudo gem install org-ruby
-      #+END_SRC
-   2. Clone the jekyll-org plugin
+*** Short version
+For experienced Jekyll users, you need to do 2 things to get ~jekyll-org~ to work
+- Install the gem
+- Include the gem in your ~_config.yml~
 
-      #+BEGIN_SRC sh
-      $ git clone http://github.com/eggcaker/jekyll-org.git /path/to/jekyllpath/_plugins/jekyll-org
-      #+END_SRC
+*** Long version
+To  use ~jekyll-org~ with Jekyll, you need to have Ruby RubyGems and Jekyll installed. See  how to do that [[http://jekyllrb.com/docs/installation/][here]].
 
-   If you want use jekyll-org as a submodule, you can:
+Create a new Jekyll project ~my-site~ run:
+#+begin_src sh
+jekyll new my-site
+#+end_src
 
-#+BEGIN_SRC sh
-$ cd /path/to/your/jekyll/site/
-$ git submodule add http://github.com/eggcaker/jekyll-org.git _plugins/jekyll-org
-#+END_SRC
+Create a Gemfile in the root of the project, and add at least the following lines:
+#+begin_src ruby
+source 'https://rubygems.org'
 
+gem 'jekyll' , '>= 3.0.0'
+gem 'jekyll-org', '>= '1.0.0'
+#+end_src
+
+Install the gems with bundler:
+#+begin_src sh
+bundle install
+#+end_src
+
+
+To use the new converter add the following line to your ~_config.yml~:
+#+begin_src ruby
+gems: [jekyll-org]
+#+end_src
 ** Usage
 
    Create a new file with =.org= extension in =_posts=, and write the post with Org. That is all! Generate your Jekyll site as you usually do.
