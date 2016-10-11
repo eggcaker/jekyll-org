@@ -2,7 +2,7 @@
 
 ** Overview
 
-   This plugin adds [[http://orgmode.org/][Org mode]] support to [[http://jekyllrb.com][Jekyll]] and lets you write posts and pages in Org.
+This plugin adds [[http://orgmode.org/][Org mode]] support to [[http://jekyllrb.com][Jekyll]] and lets you write posts and pages in Org.
 
 ** Requirements
 
@@ -14,6 +14,7 @@
 For experienced Jekyll users, you need to do 2 things to get ~jekyll-org~ to work
 - Install the gem
 - Include the gem in your ~_config.yml~
+- Include the gem in Gemfile
 
 *** Long version
 To  use ~jekyll-org~ with Jekyll, you need to have Ruby RubyGems and Jekyll installed. See  how to do that [[http://jekyllrb.com/docs/installation/][here]].
@@ -28,7 +29,7 @@ Create a Gemfile in the root of the project, and add at least the following line
 source 'https://rubygems.org'
 
 gem 'jekyll' , '>= 3.0.0'
-gem 'jekyll-org', '>= '1.0.0'
+gem 'jekyll-org', '>= '1.0.1'
 #+end_src
 
 Install the gems with bundler:
@@ -42,11 +43,9 @@ To use the new converter add the following line to your ~_config.yml~:
 gems: [jekyll-org]
 #+end_src
 ** Usage
-
-   Create a new file with =.org= extension in =_posts=, and write the post with Org. That is all! Generate your Jekyll site as you usually do.
+Create a new file with =.org= extension in =_posts=, and write the post with Org. That is all! Generate your Jekyll site as you usually do.
 
 ** Front matter
-
    Instead of YAML the front matter is configured in the usual Org way, with no lines:
 
    #+BEGIN_EXAMPLE
