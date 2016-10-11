@@ -15,11 +15,23 @@ Gem::Specification.new do |s|
   s.description = "So you want org-mode support for Jekyll. Write your _posts in org-mode, then add 'gems: [jekyll-org]' to your _config.yml. Thats it!"
   s.email = "eggcaker@gmail.com"
   s.extra_rdoc_files = [
+    "LICENSE",
     "README.org"
   ]
   s.files = [
+    "Gemfile",
+    "LICENSE",
     "README.org",
-    "jekyll-org.gemspec"
+    "Rakefile",
+    "VERSION",
+    "jekyll-org.gemspec",
+    "lib/jekyll-org.rb",
+    "script/bootstrap",
+    "script/cibuild",
+    "script/console",
+    "script/release",
+    "spec/helper.rb",
+    "spec/test_jekyll-org.rb"
   ]
   s.homepage = "http://eggcaker.github.io/jekyll-org"
   s.licenses = ["MIT"]
