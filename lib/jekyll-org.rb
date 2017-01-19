@@ -73,6 +73,7 @@ module Jekyll
 ORG
       end
 
+      post_read
     rescue => e
       puts "Error converting file #{relative_path}: #{e.message} #{e.backtrace}"
     end
