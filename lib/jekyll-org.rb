@@ -34,6 +34,9 @@ module Jekyll
   # This overrides having to use YAML in the posts.
   # Instead use settings from Org mode.
   class Document
+    DATELESS_FILENAME_MATCHER = %r!^(?:.+/)*(.*)(\.[^.]+)$!
+    DATE_FILENAME_MATCHER = %r!^(?:.+/)*(\d{4}-\d{2}-\d{2})-(.*)(\.[^.]+)$!
+
     alias :_orig_read :read
     def read(opts = {})
       unless relative_path.end_with?(".org")
@@ -58,9 +61,19 @@ module Jekyll
 
         self.data[buffer_setting] = value
       end
+      # set default slug
+      # copy and edit frmo jekyll:lib/jekyll/document.rb -- populate_title
+      if relative_path =~ DATE_FILENAME_MATCHER
+        date, slug, ext = Regexp.last_match.captures
+        modify_date(date)
+      elsif relative_path =~ DATELESS_FILENAME_MATCHER
+        slug, ext = Regexp.last_match.captures
+      end
+      self.data["title"] ||= Utils.titleize_slug(slug)
+      self.data["slug"]  ||= slug
+      self.data["ext"]   ||= ext
 
       # Disable Liquid tags from the output by default or enabled with liquid_enabled tag
-
       if liquid_enabled
         self.content = org_text.to_html
         self.content = self.content.gsub("&#8216;","'")
@@ -72,10 +85,11 @@ module Jekyll
 {% endraw %}
 ORG
       end
-
-      post_read
-    rescue => e
-      puts "Error converting file #{relative_path}: #{e.message} #{e.backtrace}"
+      begin
+        self.data
+        rescue => e
+          puts "Error converting file #{relative_path}: #{e.message} #{e.backtrace}"
+      end
     end
   end
 end
