@@ -2,7 +2,8 @@
 
 ** Overview
 
-This plugin adds [[http://orgmode.org/][Org mode]] support to [[http://jekyllrb.com][Jekyll]] and lets you write posts and pages in Org.
+This plugin adds [[http://orgmode.org/][Org mode]] support to [[http://jekyllrb.com][Jekyll]] and lets you write posts
+and pages in Org.
 
 ** Requirements
 
@@ -11,55 +12,69 @@ This plugin adds [[http://orgmode.org/][Org mode]] support to [[http://jekyllrb.
 
 ** Installation
 *** Short version
-For experienced Jekyll users, you need to do 2 things to get ~jekyll-org~ to work
-- Install the gem
+
+For experienced Jekyll users, you need to do 2 things to get
+~jekyll-org~ to work :
+
 - Include the gem in your ~_config.yml~
 - Include the gem in Gemfile
 
 *** Long version
-To  use ~jekyll-org~ with Jekyll, you need to have Ruby RubyGems and Jekyll installed. See  how to do that [[http://jekyllrb.com/docs/installation/][here]].
+
+To use ~jekyll-org~ with Jekyll, you need to have Ruby RubyGems and
+Jekyll installed.  See how to do that [[http://jekyllrb.com/docs/installation/][here]].
 
 Create a new Jekyll project ~my-site~ run:
+
 #+begin_src sh
 jekyll new my-site
 #+end_src
 
-Create a Gemfile in the root of the project, and add at least the following lines:
+Create a Gemfile in the root of the project, and add at least the
+following lines:
+
 #+begin_src ruby
 source 'https://rubygems.org'
 
 gem 'jekyll' , '>= 3.0.0'
-gem 'jekyll-org', '>= '1.0.1'
+gem 'jekyll-org', '>= 1.0.1'
 #+end_src
 
 Install the gems with bundler:
+
 #+begin_src sh
 bundle install
 #+end_src
 
-
 To use the new converter add the following line to your ~_config.yml~:
+
 #+begin_src ruby
 gems: [jekyll-org]
 #+end_src
+
 ** Usage
-Create a new file with =.org= extension in =_posts=, and write the post with Org. That is all! Generate your Jekyll site as you usually do.
+
+Create a new file with =.org= extension in =_posts=, and write the post
+with Org. That is all! Generate your Jekyll site as you usually do.
 
 ** Front matter
-   Instead of YAML the front matter is configured in the usual Org way, with no lines:
 
-   #+BEGIN_EXAMPLE
-   #+TITLE: Jekyll and Org together
-   #+LAYOUT: posts
-   #+TAGS: jekyll org-mode
+Instead of YAML the front matter is configured in the usual Org way,
+with no lines:
 
-   This is a blog post about Jekyll and Org mode.
-   #+END_EXAMPLE
+#+BEGIN_EXAMPLE
+#+TITLE: Jekyll and Org together
+#+LAYOUT: posts
+#+TAGS: jekyll org-mode
+
+This is a blog post about Jekyll and Org mode.
+#+END_EXAMPLE
 
 ** Liquid templating
 
-By default the all content is exported to raw HTML with org-ruby, but you can add =#+liquid: whatevervalue==
-in the header.  Then you can use [[http://docs.shopify.com/themes/liquid-documentation/basics][Liquid]] tags.
+By default the all content is exported to raw HTML with org-ruby, but
+you can add =#+liquid: whatevervalue== in the header.  Then you can use
+[[http://docs.shopify.com/themes/liquid-documentation/basics][Liquid]] tags.
 
 For example, if your Org file contains
 
@@ -85,30 +100,30 @@ then you will get output like
 
 ** Source code highlighting
 
-   Add a source code block as you would in Org, for example Ruby:
+Add a source code block as you would in Org, for example Ruby:
 
-  #+BEGIN_EXAMPLE
-  #+BEGIN_SRC
-   require 'rubygems'
-   require 'org-ruby'
-   data = IO.read(filename)
-   puts Orgmode::Parser.new(data).to_html
-  #+END_SRC
-  #+END_EXAMPLE
+#+BEGIN_EXAMPLE
+#+BEGIN_SRC
+ require 'rubygems'
+ require 'org-ruby'
+ data = IO.read(filename)
+ puts Orgmode::Parser.new(data).to_html
+#+END_SRC
+#+END_EXAMPLE
 
-  Then the output will have code highlighting:
+Then the output will have code highlighting:
 
-  #+BEGIN_SRC ruby
-   require 'rubygems'
-   require 'org-ruby'
-   data = IO.read(filename)
-   puts Orgmode::Parser.new(data).to_html
-  #+END_SRC
+#+BEGIN_SRC ruby
+ require 'rubygems'
+ require 'org-ruby'
+ data = IO.read(filename)
+ puts Orgmode::Parser.new(data).to_html
+#+END_SRC
 
 ** Author
 
-   eggcaker <eggcaker@gmail.com>
+eggcaker <eggcaker@gmail.com>
 
 ** License
 
-   MIT
+MIT
