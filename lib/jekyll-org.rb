@@ -79,11 +79,11 @@ module Jekyll
         self.content = self.content.gsub("&#8216;","'")
         self.content = self.content.gsub("&#8217;", "'")
       else
-        self.content = <<ORG
+        self.content = %q(
 {% raw %}
 #{org_text.to_html}
 {% endraw %}
-ORG
+)
       end
       begin
         self.data
