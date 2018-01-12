@@ -48,8 +48,9 @@ bundle install
 
 To use the new converter add the following line to your ~_config.yml~:
 
-#+begin_src ruby
-gems: [jekyll-org]
+#+begin_src yml
+pulugins: 
+  - jekyll-org
 #+end_src
 
 ** Usage
