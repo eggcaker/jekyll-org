@@ -49,7 +49,7 @@ bundle install
 To use the new converter add the following line to your ~_config.yml~:
 
 #+begin_src yml
-pulugins: 
+plugins: 
   - jekyll-org
 #+end_src
 
@@ -65,7 +65,7 @@ with no lines:
 
 #+BEGIN_EXAMPLE
 #+TITLE: Jekyll and Org together
-#+LAYOUT: posts
+#+LAYOUT: post
 #+TAGS: jekyll org-mode
 
 This is a blog post about Jekyll and Org mode.
