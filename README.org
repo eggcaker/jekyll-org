@@ -66,10 +66,13 @@ with no lines:
 #+BEGIN_EXAMPLE
 #+TITLE: Jekyll and Org together
 #+LAYOUT: post
-#+TAGS: jekyll org-mode
+#+TAGS: jekyll org-mode "tag with spaces"
 
 This is a blog post about Jekyll and Org mode.
 #+END_EXAMPLE
+
+The value of =#+TAGS= is parsed into a list by splitting it on spaces,
+tags containing spaces can be wrapped into quotes.
 
 ** Liquid templating
 
