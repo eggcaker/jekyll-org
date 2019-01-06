@@ -1,3 +1,4 @@
+require 'csv'
 require 'org-ruby'
 
 if Jekyll::VERSION < "3.0"
@@ -59,7 +60,17 @@ module Jekyll
           liquid_enabled = true
         end
 
-        self.data[buffer_setting] = value
+        if buffer_setting == 'tags'
+          # Parse a string of tags separated by spaces into a list.
+          # Tags containing spaces can be wrapped in quotes,
+          # e.g. '#+TAGS: foo "with spaces"'.
+          # 
+          # The easiest way to do this is to use rubys builtin csv parser
+          # and use spaces instead of commas as column separator.
+          self.data[buffer_setting] = CSV::parse_line(value, col_sep: ' ')
+        else
+          self.data[buffer_setting] = value
+        end
       end
       # set default slug
       # copy and edit frmo jekyll:lib/jekyll/document.rb -- populate_title
