@@ -60,11 +60,11 @@ module Jekyll
           liquid_enabled = true
         end
 
-        if buffer_setting == 'tags'
+        if (buffer_setting == 'tags' or buffer_setting == 'categories')
           # Parse a string of tags separated by spaces into a list.
           # Tags containing spaces can be wrapped in quotes,
           # e.g. '#+TAGS: foo "with spaces"'.
-          # 
+          #
           # The easiest way to do this is to use rubys builtin csv parser
           # and use spaces instead of commas as column separator.
           self.data[buffer_setting] = CSV::parse_line(value, col_sep: ' ')
