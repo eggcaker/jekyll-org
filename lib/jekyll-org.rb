@@ -68,6 +68,8 @@ module Jekyll
           # The easiest way to do this is to use rubys builtin csv parser
           # and use spaces instead of commas as column separator.
           self.data[buffer_setting] = CSV::parse_line(value, col_sep: ' ')
+        elsif %w[true false].include?(value)
+          self.data[buffer_setting] = value == 'true'
         else
           self.data[buffer_setting] = value
         end
