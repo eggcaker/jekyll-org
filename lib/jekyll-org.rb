@@ -1,8 +1,8 @@
 require 'csv'
 require 'org-ruby'
 
-if Jekyll::VERSION < "3.0"
-  raise Jekyll::FatalException, "This version of jekyll-org is only compatible with Jekyll v3 and above."
+if Jekyll::VERSION < '3.0'
+  raise Jekyll::FatalException, 'This version of jekyll-org is only compatible with Jekyll v3 and above.'
 end
 
 module Jekyll
@@ -16,7 +16,7 @@ module Jekyll
     end
 
     def output_ext(ext)
-      ".html"
+      '.html'
     end
 
     def convert(content)
@@ -50,7 +50,7 @@ module Jekyll
       self.data ||= {}
       liquid_enabled = false
 
-      org_text = Orgmode::Parser.new(content, { markup_file: "html.tags.yml" })
+      org_text = Orgmode::Parser.new(content, { markup_file: 'html.tags.yml' })
       org_text.in_buffer_settings.each_pair do |key, value|
         # Remove #+TITLE from the buffer settings to avoid double exporting
         org_text.in_buffer_settings.delete(key) if key =~ /title/i
@@ -60,7 +60,7 @@ module Jekyll
           liquid_enabled = true
         end
 
-        if (buffer_setting == 'tags' or buffer_setting == 'categories')
+        if %w[tags categories].include?(buffer_setting)
           # Parse a string of tags separated by spaces into a list.
           # Tags containing spaces can be wrapped in quotes,
           # e.g. '#+TAGS: foo "with spaces"'.
@@ -80,21 +80,21 @@ module Jekyll
       elsif relative_path =~ DATELESS_FILENAME_MATCHER
         slug, ext = Regexp.last_match.captures
       end
-      self.data["title"] ||= Utils.titleize_slug(slug)
-      self.data["slug"]  ||= slug
-      self.data["ext"]   ||= ext
+      self.data['title'] ||= Utils.titleize_slug(slug)
+      self.data['slug']  ||= slug
+      self.data['ext']   ||= ext
 
       # Disable Liquid tags from the output by default or enabled with liquid_enabled tag
       if liquid_enabled
         self.content = org_text.to_html
-        self.content = self.content.gsub("&#8216;","'")
+        self.content = self.content.gsub("&#8216;", "'")
         self.content = self.content.gsub("&#8217;", "'")
       else
         self.content = [
           '{% raw %}',
           org_text.to_html,
           '{% endraw %}'
-        ].join(" ")
+        ].join(' ')
       end
       begin
         self.data
