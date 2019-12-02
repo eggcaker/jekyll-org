@@ -36,9 +36,17 @@ module Jekyll
       extname.eql?(".org")
     end
 
-    # whether liquid is enabled by default or not.
-    def _liquid_enabled?
-      false
+    def site
+      @site ||= Jekyll.configuration({})
+    end
+
+    def org_config
+      site.config["org"] || Hash.new()
+    end
+
+    # see https://github.com/bdewey/org-ruby/blob/master/lib/org-ruby/parser.rb
+    def _org_parser_options
+      org_config.fetch("_org_parser_options", { markup_file: 'html.tags.yml' })
     end
 
     ## override: read file & parse YAML... in this case, don't parse YAML
@@ -48,8 +56,8 @@ module Jekyll
 
       self.content = File.read(path, Utils.merged_file_read_opts(site, opts))
 
-      org_text = Orgmode::Parser.new(content, { markup_file: 'html.tags.yml' })
-      @liquid_enabled = _liquid_enabled?()
+      org_text = Orgmode::Parser.new(content, _org_parser_options)
+      @liquid_enabled = org_config.fetch("liquid", false)
 
       org_text.in_buffer_settings.each_pair do |key, value|
         # Remove #+TITLE from the buffer settings to avoid double exporting

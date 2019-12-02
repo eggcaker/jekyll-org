@@ -49,7 +49,7 @@ bundle install
 To use the new converter add the following line to your ~_config.yml~:
 
 #+begin_src yml
-plugins: 
+plugins:
   - jekyll-org
 #+end_src
 
@@ -100,6 +100,17 @@ then you will get output like
 <p>hello world</p>
 <p>or</p>
 <p>2014-07-02T08:20:28+08:00</p>
+#+END_EXAMPLE
+
+*** Site wide config
+
+Alternatively, if you'd rather enable liquid by default for every
+org file being converted, you can enable it in your /_config.yml/
+file.
+
+#+BEGIN_EXAMPLE
+org:
+  liquid: true
 #+END_EXAMPLE
 
 ** Source code highlighting
