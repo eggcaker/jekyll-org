@@ -8,7 +8,6 @@ end
 module Jekyll
   class OrgConverter < Converter
     safe true
-
     priority :low
 
     def matches(ext)
@@ -32,77 +31,82 @@ module Jekyll
     end
   end
 
-  # This overrides having to use YAML in the posts.
-  # Instead use settings from Org mode.
-  class Document
-    DATELESS_FILENAME_MATCHER = %r!^(?:.+/)*(.*)(\.[^.]+)$!
-    DATE_FILENAME_MATCHER = %r!^(?:.+/)*(\d{4}-\d{2}-\d{2})-(.*)(\.[^.]+)$!
+  module OrgDocument
+    def org_file?
+      extname.eql?(".org")
+    end
 
-    alias :_orig_read :read
-    def read(opts = {})
-      unless relative_path.end_with?(".org")
-        return _orig_read(opts)
-      end
+    # whether liquid is enabled by default or not.
+    def _liquid_enabled?
+      false
+    end
 
-      Jekyll.logger.debug "Reading:", relative_path
+    ## override: read file & parse YAML... in this case, don't parse YAML
+    # see also: https://github.com/jekyll/jekyll/blob/master/lib/jekyll/document.rb
+    def read_content(opts = {})
+      return super unless org_file? # defer to default behaviour when not org file
 
       self.content = File.read(path, Utils.merged_file_read_opts(site, opts))
-      self.data ||= {}
-      liquid_enabled = false
 
       org_text = Orgmode::Parser.new(content, { markup_file: 'html.tags.yml' })
+      @liquid_enabled = _liquid_enabled?()
+
       org_text.in_buffer_settings.each_pair do |key, value|
         # Remove #+TITLE from the buffer settings to avoid double exporting
         org_text.in_buffer_settings.delete(key) if key =~ /title/i
-        buffer_setting = key.downcase
-
-        if buffer_setting == 'liquid'
-          liquid_enabled = true
-        end
-
-        if %w[tags categories].include?(buffer_setting)
-          # Parse a string of tags separated by spaces into a list.
-          # Tags containing spaces can be wrapped in quotes,
-          # e.g. '#+TAGS: foo "with spaces"'.
-          #
-          # The easiest way to do this is to use rubys builtin csv parser
-          # and use spaces instead of commas as column separator.
-          self.data[buffer_setting] = CSV::parse_line(value, col_sep: ' ')
-        elsif %w[true false].include?(value)
-          self.data[buffer_setting] = value == 'true'
-        else
-          self.data[buffer_setting] = value
-        end
+        org_assign_setting(key, value)
       end
-      # set default slug
-      # copy and edit frmo jekyll:lib/jekyll/document.rb -- populate_title
-      if relative_path =~ DATE_FILENAME_MATCHER
-        date, slug, ext = Regexp.last_match.captures
-        modify_date(date)
-      elsif relative_path =~ DATELESS_FILENAME_MATCHER
-        slug, ext = Regexp.last_match.captures
-      end
-      self.data['title'] ||= Utils.titleize_slug(slug)
-      self.data['slug']  ||= slug
-      self.data['ext']   ||= ext
 
-      # Disable Liquid tags from the output by default or enabled with liquid_enabled tag
-      if liquid_enabled
-        self.content = org_text.to_html
-        self.content = self.content.gsub("&#8216;", "'")
-        self.content = self.content.gsub("&#8217;", "'")
+      self.content = _org_buffer_handle_liquid(org_text)
+    end
+
+    def org_assign_setting(key, value)
+      key = key.downcase
+
+      case key
+      when "liquid"
+        value = _parse_boolean_value(value, "unknown LIQUID setting")
+        @liquid_enabled = value unless value.nil?
+      when "tags", "categories"
+        # Parse a string of tags separated by spaces into a list.
+        # Tags containing spaces can be wrapped in quotes,
+        # e.g. '#+TAGS: foo "with spaces"'.
+        #
+        # The easiest way to do this is to use rubys builtin csv parser
+        # and use spaces instead of commas as column separator.
+        self.data[key] = CSV::parse_line(value, col_sep: ' ')
       else
-        self.content = [
-          '{% raw %}',
-          org_text.to_html,
-          '{% endraw %}'
-        ].join(' ')
+        value_bool = _parse_boolean_value(value)
+        self.data[key] = (value_bool.nil?) ? value : value_bool
       end
-      begin
-        self.data
-        rescue => e
-          puts "Error converting file #{relative_path}: #{e.message} #{e.backtrace}"
+    end
+
+    # format the org buffer text by enabling or disabling
+    # the presence of liquid tags.
+    def _org_buffer_handle_liquid(org_text)
+      if @liquid_enabled
+        org_text.to_html.gsub("&#8216;", "'").gsub("&#8217;", "'")
+      else
+        '{% raw %} ' + org_text.to_html + ' {% endraw %}'
+      end
+    end
+
+    @@truthy_regexps = [/enabled/,  /yes/, /true/]
+    @@falsy_regexps  = [/disabled/, /no/,  /false/]
+
+    def _parse_boolean_value(value, error_msg=nil)
+      case value.downcase
+      when *@@truthy_regexps
+        true
+      when *@@falsy_regexps
+        false
+      else
+        unless error_msg.nil?
+          Jekyll.logger.warn("OrgDocument:", error_msg + ": #{value}")
+        end
       end
     end
   end
 end
+
+Jekyll::Document.prepend(Jekyll::OrgDocument)
