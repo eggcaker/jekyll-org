@@ -10,8 +10,16 @@ module Jekyll
     safe true
     priority :low
 
-    def matches(ext)
+    def self.matches(ext)
       ext =~ /org/i
+    end
+
+    def matches(ext)
+      self.class.matches ext
+    end
+
+    def self.matches_path(path)
+      matches(File.extname(path))
     end
 
     def output_ext(ext)
@@ -33,7 +41,8 @@ module Jekyll
 
   module OrgDocument
     def org_file?
-      extname.eql?(".org")
+      # extname.eql?(".org")
+      OrgConverter.matches(extname)
     end
 
     def site
@@ -113,6 +122,25 @@ module Jekyll
           Jekyll.logger.warn("OrgDocument:", error_msg + ": #{value}")
         end
       end
+    end
+  end
+
+  class Collection
+    def read
+      filtered_entries.each do |file_path|
+        full_path = collection_dir(file_path)
+        next if File.directory?(full_path)
+
+        if Utils.has_yaml_header?(full_path) ||
+           Jekyll::OrgConverter.matches_path(full_path)
+          read_document(full_path)
+        else
+          read_static_file(file_path, full_path)
+        end
+      end
+
+      # TODO remove support for jekyll 3 on 4s release
+      (Jekyll::VERSION < '4.0') ? docs.sort! : sort_docs!
     end
   end
 end
