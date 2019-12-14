@@ -53,6 +53,8 @@ plugins:
   - jekyll-org
 #+end_src
 
+warning: If you are using Jekyll < 3.5.0 use the gems key instead of plugins.
+
 ** Usage
 
 Create a new file with =.org= extension in =_posts=, and write the post
@@ -69,6 +71,32 @@ with no lines:
 #+TAGS: jekyll org-mode "tag with spaces"
 
 This is a blog post about Jekyll and Org mode.
+
+** org-table demo 
+
+   | a | b | c | d | e |
+   |---+---+---+---+---|
+   | 1 | 2 | 3 | 4 | 5 |
+
+** Liquid demo 
+   #+liquid: enabled
+   #+foo: hello world
+   {{ page.foo }}
+
+   or
+
+   {{ site.time | date_to_xmlschema }}
+   
+** Code highlighting
+   Jekyll-org also offers powerful support for code snippets:
+   #+begin_src  ruby 
+     def print_hi(name)
+       puts "Hi, #{name}"
+     end
+     print_hi('Tom')
+
+     #=> prints 'Hi, Tom' to STDOUT.
+   #+end_src
 #+END_EXAMPLE
 
 The value of =#+TAGS= is parsed into a list by splitting it on spaces,
