@@ -5,6 +5,17 @@
 This plugin adds [[http://orgmode.org/][Org mode]] support to [[http://jekyllrb.com][Jekyll]] and lets you write posts
 and pages in Org.
 
+** Related Projects 
+   
+What's the difference with org2jekll 
+You don’t need to any org-publish-project-alist to starting write post, just start with any editor that org-mode supported
+
+What’s the difference with org-jekyll?
+You don’t need to add some alien yaml in your org-mode file. You add specific org-mode headers and this will be used to format the jekyll post.
+
+What’s the difference with happyblogger?
+No more external ruby script. 
+
 ** Requirements
 
 - Jekyll
