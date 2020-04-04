@@ -154,7 +154,12 @@ org:
 
 ** Source code highlighting
 
-Add a source code block as you would in Org, for example Ruby:
+To enable source code highlighting, run =bundle install pygments.rb=. If your Jekyll
+theme has built-in support for syntax highlighting, you're all set! Otherwise, add a =pygments=-compatible
+CSS file to your site's =/assets/css/= folder. You can find a bunch of CSS themes for =pygments= in
+[[https://github.com/richleland/pygments-css][this repository]], or create your own (some related =pygments= documentation is [[https://pygments.org/docs/styles/][here]]).
+
+Then, add a source code block as you would in Org, for example Ruby:
 
 #+BEGIN_EXAMPLE
 #+BEGIN_SRC
@@ -165,7 +170,7 @@ Add a source code block as you would in Org, for example Ruby:
 #+END_SRC
 #+END_EXAMPLE
 
-Then the output will have code highlighting:
+And the output will have code highlighting:
 
 #+BEGIN_SRC ruby
  require 'rubygems'
