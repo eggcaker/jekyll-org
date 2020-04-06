@@ -105,8 +105,8 @@ module Jekyll
         end
       end
 
-      @@truthy_regexps = [/enabled/,  /yes/, /true/]
-      @@falsy_regexps  = [/disabled/, /no/,  /false/]
+      @@truthy_regexps = [/^enabled$/,  /^yes$/, /^true$/]
+      @@falsy_regexps  = [/^disabled$/, /^no$/,  /^false$/]
 
       def _parse_boolean(value, error_msg=nil)
         case value.downcase
