@@ -74,7 +74,12 @@ with Org. That is all! Generate your Jekyll site as you usually do.
 ** Front matter
 
 Instead of YAML the front matter is configured in the usual Org way,
-with no lines:
+with no lines.   
+
+Below is an example of an Org post, featuring front matter, tags, tables,
+liquid templating and syntax highlighting. To render this example, remove
+the leading hash symbols (#) at =#+begin_src= and =#+begin_end= beforehand
+(this is a workaround for GitHub's org rendering).
 
 #+BEGIN_EXAMPLE
 #+TITLE: Jekyll and Org together
@@ -100,14 +105,14 @@ This is a blog post about Jekyll and Org mode.
    
 ** Code highlighting
    Jekyll-org also offers powerful support for code snippets:
-   #+begin_src  ruby 
+   ##+begin_src  ruby 
      def print_hi(name)
        puts "Hi, #{name}"
      end
      print_hi('Tom')
 
      #=> prints 'Hi, Tom' to STDOUT.
-   #+end_src
+   ##+end_src
 #+END_EXAMPLE
 
 The value of =#+TAGS= is parsed into a list by splitting it on spaces,
