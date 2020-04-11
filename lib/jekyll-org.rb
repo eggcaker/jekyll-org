@@ -21,9 +21,9 @@ module Jekyll
     ## override: read file & parse YAML... in this case, don't parse YAML
     # see also: https://github.com/jekyll/jekyll/blob/master/lib/jekyll/document.rb
     def read_content(opts = {})
-      return super unless org_file? # defer to default behaviour when not org file
+      return super(**opts) unless org_file? # defer to default behaviour when not org file
 
-      self.content = File.read(path, Utils.merged_file_read_opts(site, opts))
+      self.content = File.read(path, **Utils.merged_file_read_opts(site, opts))
       converter = site.find_converter_instance(Jekyll::Converters::Org)
       parser, settings = converter.parse_org(self.content)
 
@@ -42,7 +42,7 @@ module Jekyll
 
       self.data ||= Hash.new()
       self.content = File.read(@path || site.in_source_dir(base, name),
-                               Utils.merged_file_read_opts(site, opts))
+                               **Utils.merged_file_read_opts(site, opts))
       converter = site.find_converter_instance(Jekyll::Converters::Org)
       parser, settings = converter.parse_org(self.content)
 
