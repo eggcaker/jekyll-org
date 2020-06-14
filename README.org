@@ -159,7 +159,7 @@ org:
 
 ** Source code highlighting
 
-To enable source code highlighting, run =bundle install pygments.rb=. If your Jekyll
+To enable source code highlighting, run =bundle add pygments.rb=. If your Jekyll
 theme has built-in support for syntax highlighting, you're all set! Otherwise, add a =pygments=-compatible
 CSS file to your site's =/assets/css/= folder. You can find a bunch of CSS themes for =pygments= in
 [[https://github.com/richleland/pygments-css][this repository]], or create your own (some related =pygments= documentation is [[https://pygments.org/docs/styles/][here]]).
