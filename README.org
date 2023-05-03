@@ -1,8 +1,8 @@
 * jekyll-org
 
-Looking for a New Maintainer
+*Looking for a New Maintainer*
  
-**Notice**: I am currently not realy use ruby right now, and I am looking for someone who is interested and willing to take over its maintenance. If you're interested, please contact me using one of the methods below:
+*Notice*: I am currently not realy use ruby and jekyll right now, and I am looking for someone who is interested and willing to take over its maintenance. If you're interested, please contact me using one of the methods below:
 Send an email to: eggcaker@gmail.com
 Leave a message in the issues.
 
