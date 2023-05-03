@@ -1,5 +1,11 @@
 * jekyll-org
 
+Looking for a New Maintainer
+ 
+Notice: I am currently not realy use ruby right now, and I am looking for someone who is interested and willing to take over its maintenance. If you're interested, please contact me using one of the methods below:
+Send an email to: eggcaker@gmail.com
+Leave a message in the issues.
+
 ** Overview
 
 This plugin adds [[http://orgmode.org/][Org mode]] support to [[http://jekyllrb.com][Jekyll]] and lets you write posts
